@@ -1,28 +1,44 @@
 <template>
-  <h1>Task Details</h1>
-  <form @submit.prevent="updateTask()">
-    <input
-      type="text"
-      placeholder="Nombre del cliente"
-      v-model="currentTask.clientName"
-    />
-    <input
-      type="text"
-      placeholder="Teléfono del cliente"
-      v-model="currentTask.clientPhone"
-    />
-    <input
-      type="text"
-      placeholder="Dirección del cliente"
-      v-model="currentTask.clientAddress"
-    />
-    <textarea
-      rows="3"
-      placeholder="Descripción del servicio"
-      v-model="currentTask.serviceDescription"
-    ></textarea>
-    <button>Guardar</button>
-  </form>
+  <div class="container mt-3">
+    <form @submit.prevent="updateTask()">
+      <div class="row formContainer">
+        <legend class="text-center h3 mb-3">Detalles del servicio</legend>
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre del cliente"
+            v-model="currentTask.clientName"
+          />
+          <input
+            type="text"
+            class="form-control mt-3"
+            placeholder="Teléfono del cliente"
+            v-model="currentTask.clientPhone"
+          />
+          <input
+            type="text"
+            class="form-control mt-3"
+            placeholder="Dirección del cliente"
+            v-model="currentTask.clientAddress"
+          />
+        </div>
+        <div class="col-md-6">
+          <textarea
+            rows="5"
+            class="form-control"
+            placeholder="Descripción del servicio"
+            v-model="currentTask.serviceDescription"
+          ></textarea>
+        </div>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-success btn-lg mt-3">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -42,10 +58,8 @@ export default defineComponent({
       this.currentTask = res.data;
     },
     async updateTask() {
-      updateTask(this.currentTask._id, this.currentTask);
-      this.$router.push({
-        name: "tasks",
-      });
+      await updateTask(this.currentTask._id, this.currentTask);
+      this.$router.push('/');
     },
   },
   mounted() {
@@ -55,3 +69,11 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.formContainer {
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px;
+}
+</style>

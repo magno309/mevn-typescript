@@ -1,22 +1,29 @@
 <template>
-  <nav>
-    <ul>
-      <li>
-          <router-link to="/">Tasks</router-link>
-      </li>
-      <li>
-          <router-link to="/tasks/new">Agregar servicio</router-link>
-      </li>
-    </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <router-link to="/" class="navbar-brand">Vue Typescript</router-link>
+      <div>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link"
+              >Lista de servicios</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/tasks/new" class="nav-link"
+              >Agregar servicio</router-link
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 
-
 export default defineComponent({
-    name: 'navbar-component',
+  name: "navbar-component",
 });
-
 </script>
