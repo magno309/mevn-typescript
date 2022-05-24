@@ -6,14 +6,14 @@ const router = Router();
 
 router.get("/task", async (req, res) => {
     const tasks = await Task.find();
-    res.send(tasks);
+    res.json(tasks);
 });
 
 router.post("/task", async (req, res) => {
     const { clientName, clientPhone, clientAddress, serviceDescription } = req.body;
-    const task = new Task({ clientName, clientPhone, clientAddress, serviceDescription });
-    await task.save();
-    res.json(task);
+    const newTask = new Task({ clientName, clientPhone, clientAddress, serviceDescription });
+    const savedTask = await newTask.save();
+    res.json(savedTask);
 });
 
 router.get("/task/:id", async (req, res) => {
@@ -23,7 +23,7 @@ router.get("/task/:id", async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: "Servicio no encontrado" });
         }
-        res.send(task);
+        res.json(task);
     } catch (error) {
         return res.status(500).send(error);
     }
